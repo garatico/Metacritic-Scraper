@@ -33,17 +33,14 @@ publisher_arr, esrb_arr, developer_arr = [], [], []
 each_game_arr = [publisher_arr, developer_arr, esrb_arr]
 each_game_dict = {'developer' : developer_arr, 'publisher' : publisher_arr, 'esrb' : esrb_arr}
 # Local File Set
-local_set_arr = []
-local_soup_arr = []
+local_set_arr, local_soup_arr = [], []
 
 ''' SCRAPING METHODS '''
-# SCRAPES SWITCH / PS4
-#main_combined_multiple(0, 90, game_headers, [platform_list[0], platform_list[4]] )
+main_combined_multiple(9, 20, game_headers, [platform_list[8]])
 #individual_combined_timed(0, 200, game_headers, url_arr)
 
 ''' LOCAL APPENDING METHODS '''
 # Stores the local file set page source code in an array
-# PS2 - PS5, Xbox - Series X
 open_multiple_local_fileset(pwd, [platform_list[2], platform_list[3], platform_list[4], platform_list[5], platform_list[6], platform_list[7], platform_list[8], platform_list[9]], 0, 21, local_set_arr)
 # Iterates thru local file array and parses to soup objects
 local_soup_build(local_set_arr, local_soup_arr)

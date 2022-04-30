@@ -1,0 +1,9 @@
+# METACRITIC WEB SCRAPER
+
+
+
+
+
+
+
+

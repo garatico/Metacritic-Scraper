@@ -7,6 +7,13 @@ from src.local_methods import *
 from src.platform_methods import *
 from src.title_methods import *
 
+
+# Runs the main scraping function for a list of consoles
+def main_combined_multiple(start_page, end_page, game_headers, consoles):
+    for g in consoles:
+        print(g + " starting scrape.")
+        main_combined_timed(start_page, end_page, game_headers, g)
+
 # Saves the ranked games by platform original pages for one platform
 def main_combined_timed(start_page, end_page, game_headers, platform):
     # Scrapes from all pages inside and including range

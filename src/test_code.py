@@ -1,4 +1,8 @@
+'''
+from sys import platform
+from random import randint
 
+#filepath = pwd + "/db/game_db_sql"
 
 # DATE / TIME REFERENCES
 todays_date = datetime.date.today()
@@ -6,7 +10,7 @@ todays_year = str(todays_date.year)
 todays_month = str(todays_date.month)
 todays_day = str(todays_date.day)
 print(todays_month + "." + todays_day + "." + todays_year)
-
+'''
 
 ''' WORKFLOW TESTING
 # WRITES NP ARRAY TO CSV

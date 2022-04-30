@@ -1,21 +1,14 @@
 # AUTHOR: Giovanni Aratico
 # FILE: Metacritic.py
 # CREATED: 11-15-2021
-# UPDATED: 04-28-2022
-
-# Requests for HTTP Requests
-# BeautifulSoup for parsing Data
+# UPDATED: 04-29-2022
 import os
-from sys import platform
 from time import *
 from datetime import *
-from random import randint
 import sqlite3
-
 # EXTERNAL LIBRARIES IMPORTING
 import pandas as pd
 import numpy as np
-
 # METHODS FROM OTHER FILES
 from src.platform_methods import *
 from src.title_methods import *
@@ -24,7 +17,6 @@ from src.scrape_methods import *
 
 # DIRECTORY REFERENCES
 pwd = os.getcwd()
-filepath = pwd + "/db/game_db_sql"
 
 # Values to generate correct URLs / Headers
 platform_list = ['switch', 'ps', 'ps2', 'ps3', 'ps4', 'ps5', 'xbox', 'xbox360', 'xboxone', 'xbox-series-x', 'pc']
@@ -45,28 +37,14 @@ local_set_arr = []
 local_soup_arr = []
 
 ''' SCRAPING METHODS '''
-# SCRAPES SWITCH
-main_combined_timed(0, 90, game_headers, platform_list[0])
-# SCRAPES PS4 / PS5
-main_combined_timed(0, 90, game_headers, platform_list[4])
-main_combined_timed(0, 90, game_headers, platform_list[5])
-# SCRAPES XBOX ONE / XBOX SERIES X
-main_combined_timed(0, 90, game_headers, platform_list[8])
-main_combined_timed(0, 90, game_headers, platform_list[9])
+# SCRAPES SWITCH / PS4
+#main_combined_multiple(0, 90, game_headers, [platform_list[0], platform_list[4]] )
 #individual_combined_timed(0, 200, game_headers, url_arr)
 
 ''' LOCAL APPENDING METHODS '''
 # Stores the local file set page source code in an array
-# PS2 - PS5
-open_local_fileset(pwd, platform_list[2], 0, 15, local_set_arr)
-open_local_fileset(pwd, platform_list[3], 0, 13, local_set_arr)
-open_local_fileset(pwd, platform_list[4], 0, 21, local_set_arr)
-open_local_fileset(pwd, platform_list[5], 0, 2, local_set_arr)
-# Xbox - Series X
-open_local_fileset(pwd, platform_list[6], 0, 8, local_set_arr)
-open_local_fileset(pwd, platform_list[7], 0, 17, local_set_arr)
-open_local_fileset(pwd, platform_list[8], 0, 12, local_set_arr)
-open_local_fileset(pwd, platform_list[9], 0, 2, local_set_arr)
+# PS2 - PS5, Xbox - Series X
+open_multiple_local_fileset(pwd, [platform_list[2], platform_list[3], platform_list[4], platform_list[5], platform_list[6], platform_list[7], platform_list[8], platform_list[9]], 0, 21, local_set_arr)
 # Iterates thru local file array and parses to soup objects
 local_soup_build(local_set_arr, local_soup_arr)
 

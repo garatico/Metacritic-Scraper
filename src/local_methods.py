@@ -1,7 +1,7 @@
 # AUTHOR: Giovanni Aratico
 # FILE: local_methods.py
 # CREATED: 01-11-2022
-# UPDATED: 01-11-2022
+# UPDATED: 04-29-2022
 import os
 import datetime
 from src.platform_methods import *
@@ -23,6 +23,11 @@ def open_local_file(path, platform, file_count, local_set_arr):
             local_set_arr.append(f.read())
     except FileNotFoundError:
         print('File ' + str(path) + ' not found!')
+
+
+def open_multiple_local_fileset(path, consoles, start_file, end_file, local_set_arr):
+    for g in consoles:
+        open_local_fileset(path, g, start_file, end_file, local_set_arr)
 
 # OPENS SET OF LOCAL FILES
 def open_local_fileset(path, platform, start_file, end_file, local_set_arr):

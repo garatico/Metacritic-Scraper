@@ -1,7 +1,7 @@
 # AUTHOR: Giovanni Aratico
 # FILE: local_methods.py
 # CREATED: 01-11-2022
-# UPDATED: 04-29-2022
+# UPDATED: 04-30-2022
 import os
 import datetime
 from src.platform_methods import *
@@ -37,15 +37,18 @@ def open_local_fileset(path, platform, start_file, end_file, local_set_arr):
 
 # LOCAL PAGE SAVING FUNCTIONS
 def if_page_has_content(temp_soup):
-    content = temp_soup.find('div', id="main_content")
-    content2 = content.find('div', class_="title_bump")
-    content3 = content2.text
-    content3 = content3.replace('\n', '')
-    content3 = content3.replace(' ', '')
-    if "Nogamesfound." in content3: 
-        return False
-    else:
-        return True
+    try:
+        content = temp_soup.find('div', id="main_content")
+        content2 = content.find('div', class_="title_bump")
+        content3 = content2.text
+        content3 = content3.replace('\n', '')
+        content3 = content3.replace(' ', '')
+        if "Nogamesfound." in content3: 
+            return False
+        else:
+            return True
+    except:
+        print("Could not scrape")
 # USED TO SAVE ONLY THE TEXT OUTPUT OF THE PAGE
 def to_local_parser(pwd, page, page_html):
     print('LOCAL PARSER REACHED')

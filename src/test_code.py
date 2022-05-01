@@ -10,6 +10,14 @@ todays_year = str(todays_date.year)
 todays_month = str(todays_date.month)
 todays_day = str(todays_date.day)
 print(todays_month + "." + todays_day + "." + todays_year)
+
+# TRANSPOSES DATA TO CORRECT FORMAT
+platform_np = platform_np.T
+#Transforms copy and writes to dbT
+platform_read_copy = platform_read_copy.T
+platform_read_copy.to_csv(pwd + "/db/game_db_npT.csv")
+
+
 '''
 
 ''' WORKFLOW TESTING

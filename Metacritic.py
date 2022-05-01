@@ -1,7 +1,7 @@
 # AUTHOR: Giovanni Aratico
 # FILE: Metacritic.py
 # CREATED: 11-15-2021
-# UPDATED: 04-29-2022
+# UPDATED: 04-30-2022
 import os
 from time import *
 from datetime import *
@@ -36,7 +36,7 @@ each_game_dict = {'developer' : developer_arr, 'publisher' : publisher_arr, 'esr
 local_set_arr, local_soup_arr = [], []
 
 ''' SCRAPING METHODS '''
-main_combined_multiple(9, 20, game_headers, [platform_list[8]])
+#main_combined_multiple(9, 20, game_headers, [platform_list[8]])
 #individual_combined_timed(0, 200, game_headers, url_arr)
 
 ''' LOCAL APPENDING METHODS '''
@@ -44,50 +44,35 @@ main_combined_multiple(9, 20, game_headers, [platform_list[8]])
 open_multiple_local_fileset(pwd, [platform_list[2], platform_list[3], platform_list[4], platform_list[5], platform_list[6], platform_list[7], platform_list[8], platform_list[9]], 0, 21, local_set_arr)
 # Iterates thru local file array and parses to soup objects
 local_soup_build(local_set_arr, local_soup_arr)
-
 # Appends parsed information into arrays
 local_platform_append(local_soup_arr, platform_main_dict)
-
 game_arr = np.array([title_arr, score_arr, rank_arr, url_arr, platform_arr, release_date_arr])
 
 ''' WRITE TO FILES '''
-# WRITES NP ARRAY TO CSV
+# WRITES NP ARRAY TO CSV / TRANSPOSED CSV
 platform_np = pd.DataFrame(game_arr)
-# TRANSPOSES DATA TO CORRECT FORMAT
-platform_np = platform_np.T
 platform_np.to_csv(pwd + "/db/game_db_np.csv")
-
+platform_npT = platform_np.T
+platform_npT.to_csv(pwd + "/db/game_db_npT.csv")
 
 ''' READ / SAVE FILES '''
 # Reads CSV exported to
-platform_read = pd.read_csv(pwd + "/db/game_db_np.csv")
-# Creates rollback copy
-platform_read_copy = platform_read.copy()
-
-#Transforms copy and writes to dbT
-platform_read_copy = platform_read_copy.T
-platform_read_copy.to_csv(pwd + "/db/game_db_npT.csv")
+platform_read = pd.read_csv(pwd + "/db/game_db_npT.csv")
 
 ''' READ / ANALYZE FILES '''
 # IN MEMORY COPY SAVED
-platform_analysis = pd.read_csv(pwd + "/db/game_db_np.csv")
-platform_analysis2 = platform_analysis.copy()
+platform_analysis = platform_read.copy()
 # DROPS ROW
-platform_analysis2 = platform_analysis2.drop(index = [0])
+platform_analysis = platform_analysis.drop(index = [0])
 # NAMES COLUMNS
-platform_analysis2.columns = ['', 'title', 'score', 'rank', 'url', 'platform', 'release_date']
+platform_analysis.columns = ['', 'title', 'score', 'rank', 'url', 'platform', 'release_date']
 # DROPS COLUMNS
-platform_analysis2.drop(platform_analysis2.columns[[0]], axis=1, inplace=True)
+platform_analysis.drop(platform_analysis.columns[[0]], axis=1, inplace=True)
 
 # FORMATS OLD DATETIME TO BETTER FORMAT
-correct_date = pd.to_datetime(platform_analysis2['release_date'])
+correct_date = pd.to_datetime(platform_analysis['release_date'])
 # APPENDS NEW DATE FORMAT COLUMN TO DF
-platform_analysis2 = pd.concat([platform_analysis2, correct_date], axis=1)
-
+platform_analysis = pd.concat([platform_analysis, correct_date], axis = 1)
 # SAVES NEW VERSION
-platform_analysis2.to_csv(pwd + "/db/game_db_analysis.csv")
-
-''' OUTPUT TO SCREEN '''
-platform_analysis2 = pd.read_csv(pwd + "/db/game_db_analysis.csv")
-print(platform_analysis2)
+platform_analysis.to_csv(pwd + "/db/game_db_analysis.csv")
 

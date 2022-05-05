@@ -1,10 +1,6 @@
-# AUTHOR: Giovanni Aratico
-# FILE: local_methods.py
-# CREATED: 01-11-2022
-# UPDATED: 04-30-2022
 import os
 import datetime
-from src.platform_methods import *
+from src.platform import *
 from bs4 import BeautifulSoup
 
 ''' HTML BASED METHODS '''

@@ -1,8 +1,3 @@
-# AUTHOR: Giovanni Aratico
-# FILE: platform_methods.py
-# CREATED: 01-04-2022
-# UPDATED: 01-04-2022
-
 import os
 from sys import platform
 from time import *
@@ -10,7 +5,7 @@ from random import randint
 
 import requests
 from bs4 import BeautifulSoup
-from src.local_methods import *
+from src.local import *
 
 pwd = os.getcwd()
 

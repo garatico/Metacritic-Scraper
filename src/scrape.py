@@ -1,10 +1,5 @@
-# AUTHOR: Giovanni Aratico
-# FILE: local_methods.py
-# CREATED: 02-02-2022
-# UPDATED: 04-30-2022
-
-from src.local_methods import *
-from src.platform_methods import *
+from src.local import *
+from src.platform import *
 from src.title_methods import *
 
 
